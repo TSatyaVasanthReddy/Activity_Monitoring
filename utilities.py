@@ -55,6 +55,6 @@ def recursive_copy(pattern, in_dir, out_dir):
 
     return
 
-recursive_unzip("data/combined/")
-recursive_copy("accelerometer", "data/combined/", "data_3_4_2018/")
-recursive_copy("gyroscope", "data/combined/", "data_3_4_2018/")
+recursive_unzip("data/data_3_7_2018/")
+recursive_copy("accelerometer", "data/data_3_7_2018/", "data_3_7_2018/")
+recursive_copy("gyroscope", "data/data_3_7_2018/", "data_3_7_2018/")
