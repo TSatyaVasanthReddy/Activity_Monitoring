@@ -12,17 +12,22 @@ def recursive_unzip(in_dir):
 
                 full_path = "/".join(path) + "/" + f
 
-                inF = gzip.GzipFile(full_path, 'rb')
-                s = inF.read()
-                inF.close()
+                try:
+                    inF = gzip.GzipFile(full_path, 'rb')
+                    s = inF.read()
+                    inF.close()
 
-                os.remove(full_path)
+                    os.remove(full_path)
 
-                out_path = "".join(list(full_path)[:-3])
-                print(out_path)
-                outF = open(out_path, 'wb')
-                outF.write(s)
-                outF.close()
+                    out_path = "".join(list(full_path)[:-3])
+                    print(out_path)
+                    outF = open(out_path, 'wb')
+                    outF.write(s)
+                    outF.close()
+                except Exception as e:
+                    print("Skipping file, remove ", full_path)
+                    # os.remove(full_path)
+
 
     return
 
@@ -42,7 +47,7 @@ def recursive_copy(pattern, in_dir, out_dir):
         #print((len(path) - 1) * '---', os.path.basename(root))
         for f in files:
             print(f)
-            if pattern in f and "data" in f:
+            if pattern in f and "data" in f and not f.endswith(".gz"):
                 print("/".join(path) + "/" + f)
 
                 full_path = "/".join(path) + "/" + f
@@ -55,6 +60,6 @@ def recursive_copy(pattern, in_dir, out_dir):
 
     return
 
-recursive_unzip("data/test3/")
-recursive_copy("accelerometer", "data/test3/", "test3/")
-recursive_copy("gyroscope", "data/test3/", "test3/")
+# recursive_unzip("data/Sessions/")
+# recursive_copy("accelerometer", "data/Sessions/", "test4/")
+# recursive_copy("gyroscope", "data/Sessions/", "test4/")
